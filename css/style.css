@@ -1,0 +1,30 @@
+/*
+Title: CFG to CNF Simulator
+Author: Mohammad Imam Hossain
+Date: 28/06/2021
+All rights reserved.
+*/
+
+body {
+    background-image: url('../images/icon.png');
+    background-attachment: fixed;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+#mainbody {
+    background-color: rgba(61, 61, 92, 0.80);
+}
+
+#mainbody>div.row {
+    min-height: 100vh;
+}
+
+#leftside {
+    background-color: rgb(224, 224, 235, 0.80);
+}
+
+.labels {
+    color: #666699;
+    font-weight: bold;
+}

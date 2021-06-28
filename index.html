@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Mohammad Imam Hossain">
+    <meta name="keywords" content="context free grammar, cfg, chomsky normal form, cnf, epsilon, start variable, terminals, variables">
+    <meta name="description" content="A website to convert Context Free Grammar(CFG) to equivalent Chomsky Normal Form(CNF)">
+
+    <title>CFG to CNF</title>
+    <link rel="icon" href="images/icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- font awesome integration -->
+    <link href="lib/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+
+    <!-- integrating own css -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid" id="mainbody">
+        <div class="row">
+            <!-- left panel -->
+            <div class="col-lg-3" id="leftside">
+                <h2 class="text-center pt-3" style="color:#47476b;">Context Free Grammar</h2>
+
+                <div style="position:relative;height:50px;">
+                    <div style="position:absolute;left:0px;top:10px;">
+                        <iframe class="col-auto" src="https://ghbtns.com/github-btn.html?user=devimam&repo=cfgtocnf&type=star&count=true&size=large" frameborder="0" scrolling="0" height="30" title="Star this project"></iframe>
+                    </div>
+
+                    <div style="position:absolute;right:0px;top:0px;">
+                        <a href="#" target="_blank" class="col-auto ms-auto"><img src="images/help.png" width="50" height="50"></a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="vars" placeholder="Set of Variables, V">
+                        <label for="vars" class="labels">Set of Variables, V</label>
+                        <div class="form-text">Comma separated list of variables. Each variable is an uppercase letter from A to Z.</div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="terminals" placeholder="Set of Terminals, &sum;">
+                        <label for="terminals" class="labels">Set of Terminals, &sum;</label>
+                        <div class="form-text">Comma separated list of terminals. Each terminal is a lowercase letter from a to z.</div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="startvar"></select>
+                        <label for="startvar" class="labels">Start Variable, S</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="labels">Set of Rules, R = { </div>
+                        <div id="ruleboard">
+                            <!-- dynamically all the rule fields will be placed here -->
+                        </div>
+                        <div class="labels">}</div>
+                    </div>
+
+                    <div>
+                        <input type="button" class="btn btn-outline-secondary w-100" id="addnewbtn" value="Add New Rule">
+                    </div>
+                </div>
+            </div>
+
+            <!-- right panel -->
+            <div class="col-lg-9" id="rightside" style="position:relative;">
+                <h2 class="text-center py-3" style="color:#00ffff;position:relative;">
+                    Chomsky Normal Form
+                    <div style="position:absolute;top:10px;right:0px;">
+                        <input type="button" class="btn btn-outline-info" value="Generate CNF" onclick="convert();">
+                    </div>
+                </h2>
+
+                <div style="margin-bottom: 30px;">
+                    <div class="row pb-3">
+                        <div class="col-lg-4">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 1</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Add New Start Variable</h6>
+                                    <hr>
+                                    <div class="card-text" id="step1">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pb-3">
+                        <div class="offset-lg-2 col-lg-4">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 2</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Remove All &epsilon; Rules</h6>
+                                    <hr>
+                                    <div class="card-text" id="step2">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pb-3">
+                        <div class="offset-lg-4 col-lg-4">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 3</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Remove All Unit Rules</h6>
+                                    <hr>
+                                    <div class="card-text" id="step3">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pb-3">
+                        <div class="offset-lg-6 col-lg-4">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Step 4</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Standard Form Conversion</h6>
+                                    <hr>
+                                    <div class="card-text" id="step4">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="color: #1affff;position:absolute;bottom:0px;left:0px;width:100%;">
+                    <div style="text-align: center;">
+                        MIT License &copy; 2021 <strong>Mohammad Imam Hossain</strong> | Email: <strong><a
+                                href="mailto:imambuet11@gmail.com" style="color:inherit;">imambuet11@gmail.com</a></strong> | All Rights Reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- integrating my own script -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
