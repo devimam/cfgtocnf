@@ -20,6 +20,7 @@ No explicit installation is necessary.
 * CSS3
 * JavaScript
 * Bootstrap 5
+* Font Awesome Icon Library
 
 ## Versioning
 
