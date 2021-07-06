@@ -1,6 +1,6 @@
 # CFG to CNF
 
-A web based project to covnert any Context Free Grammar(CFG) to equivalent Chomsky Normal Form(CNF).
+A web based project to convert any Context Free Grammar(CFG) to equivalent Chomsky Normal Form(CNF).
 
 ## Getting Started
 
